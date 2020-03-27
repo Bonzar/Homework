@@ -8,8 +8,9 @@ from functools import reduce
 #     if c > 15:
 #         break
 #     else:
-#         print(el)
 #         c += 1
+#         print(f'Факториал {c} = {el}')
+
 
 def fibo_gen():
     for i in range(2, 25):
@@ -22,5 +23,5 @@ for el in fibo_gen():
     if c > 15:
         break
     else:
-        print(el)
         c += 1
+        print(f'Факториал {c} = {el}')
