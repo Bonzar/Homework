@@ -5,7 +5,7 @@ from functools import reduce
 #
 # c = 0
 # for el in gen:
-#     if c > 15:
+#     if c > 14:
 #         break
 #     else:
 #         c += 1
@@ -20,7 +20,7 @@ def fibo_gen():
 
 c = 0
 for el in fibo_gen():
-    if c > 15:
+    if c > 14:
         break
     else:
         c += 1
