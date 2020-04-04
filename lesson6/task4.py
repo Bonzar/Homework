@@ -1,10 +1,13 @@
+from random import choice
+
+
 def print_stats(type_car):
     print('---------------------------------------------------')
     print(f'{type_car.name}, {type_car.color}')
     type_car.show_speed()
     type_car.go()
     type_car.show_speed()
-    type_car.turn('left')
+    type_car.turn(choice(['left', 'right']))
     type_car.stop()
     type_car.show_speed()
 
@@ -28,7 +31,7 @@ class Car:
         if turn.lower() == 'left':
             print('Car turn left')
         elif turn.lower() == 'right':
-            print('Car turn left')
+            print('Car turn right')
 
     def show_speed(self):
         print(f'Current speed = {self.speed} km/h')
