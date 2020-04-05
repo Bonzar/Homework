@@ -7,7 +7,7 @@ def print_stats(type_car):
     type_car.show_speed()
     type_car.go()
     type_car.show_speed()
-    type_car.turn(choice(['left', 'right']))
+    type_car.turn(choice(('left', 'right')))
     type_car.stop()
     type_car.show_speed()
 
