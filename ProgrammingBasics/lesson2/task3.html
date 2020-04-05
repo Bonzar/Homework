@@ -1,0 +1,9 @@
+<script type="text/javascript">
+	deposit = +prompt('Выведите значение депозита:');
+	rate = +prompt('Выведите ежегодный процент:');
+	for (var i = 1; i <= 5; i ++){
+		deposit = deposit + deposit*(rate/100);
+		alert('Через ' + i + ' год/лет ваш вклад будет состовлять: ' + deposit.toFixed(2));
+	}
+	window.close()
+</script>

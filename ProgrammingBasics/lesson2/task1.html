@@ -1,0 +1,22 @@
+<script type="text/javascript" >
+	var answer = parseInt(Math.random() * 100);
+	var activeUser = 1
+	answer = 1
+	for(var tryCount = 1; tryCount > 0; tryCount++){
+        if (tryCount/2 == Math.ceil(tryCount/2)){
+        	activeUser = 2;
+        } else {
+        	activeUser = 1;
+        }
+        var userAnswer = +prompt(activeUser + " игрок. Введите число от 1 до 100. Попытка: " + Math.ceil(tryCount/2) + ".");
+	    if(userAnswer == answer){
+	        alert("Поздравляю, " + activeUser + " игрок Победил! Колчество использованных попыток: " + Math.ceil(tryCount/2) + ".");
+	        break;
+	    } else if(userAnswer > answer){
+	        alert("Вы ввели слишком большое число.");
+	    } else if(userAnswer < answer){
+	        alert("Вы ввели слишком маленькое число.");
+	    } 
+	}
+	window.close();
+</script>
