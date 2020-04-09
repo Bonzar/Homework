@@ -1,13 +1,24 @@
 class Cell:
     def __init__(self, count):
-        self.count = count
+        try:
+            if int(count) == float(count):
+                self.count = count
+            else:
+                raise ArithmeticError
+        except ArithmeticError:
+            print(f'\r\033[31mERROR: Not an integer number of cells in the cell was entered - {count}')
+            raise SystemExit
 
     def __add__(self, other):
         return Cell(self.count + other.count)
 
     def __sub__(self, other):
-        if self.count < other.count:
-            print(f"\r\033[31mThe number of instances of the first cell is less than that of the second.")
+        try:
+            if self.count < other.count:
+                raise ArithmeticError
+        except ArithmeticError:
+            print(f"\r\033[31mThe number of cells in one cell is less than that of the other.")
+            raise SystemExit
         else:
             return Cell(self.count - other.count)
 
