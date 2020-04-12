@@ -1,13 +1,5 @@
 {
-    "Printer": [
-        {
-            "firm": "Apple",
-            "cost": 12000,
-            "model": "PR_1200B",
-            "type_paint": "Black & White",
-            "count": 10
-        }
-    ],
+    "Printer": [],
     "Scanner": [],
     "PrinterScanner": [],
     "Xerox": []
