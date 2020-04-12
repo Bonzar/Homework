@@ -50,7 +50,7 @@ class Printer(OrgEquipment):
     def add_printer(self):
         try:
             if self.model.upper()[0] == 'P':
-                Scanner.add_to_warehouse(self._list_of_params)
+                Printer.add_to_warehouse(self._list_of_params)
             else:
                 raise TypeOrgEquipmentError('Printer', self.model)
         except TypeOrgEquipmentError:
@@ -65,15 +65,6 @@ class Scanner(OrgEquipment):
         self._list_of_params = {'firm': firm, 'cost': cost, 'model': model, 'version_scanner': self.version_scanner,
                                 'size': size}
 
-    def add_scanner(self):
-        try:
-            if self.model[0].upper == 'S':
-                Scanner.add_to_warehouse(self._list_of_params)
-            else:
-                raise TypeOrgEquipmentError('Scanner', self.model)
-        except TypeOrgEquipmentError:
-            return
-
     def _version_scanner1(self):
         if self.version_scanner is not None:
             pass
@@ -81,6 +72,15 @@ class Scanner(OrgEquipment):
             number_of_version = self.model[self.model.index('S') + 1]
             if number_of_version.isdigit() and 1 <= int(number_of_version) <= 3:
                 self.version_scanner = number_of_version
+
+    def add_scanner(self):
+        try:
+            if self.model.upper()[0] == 'S':
+                Scanner.add_to_warehouse(self._list_of_params)
+            else:
+                raise TypeOrgEquipmentError('Scanner', self.model)
+        except TypeOrgEquipmentError:
+            return
 
 
 class PrinterScanner(Printer, Scanner):
@@ -95,7 +95,13 @@ class PrinterScanner(Printer, Scanner):
                                 'size': size}
 
     def add_printer_scanner(self):
-        PrinterScanner.add_to_warehouse(self._list_of_params)
+        try:
+            if self.model.upper()[:2] == 'PS':
+                PrinterScanner.add_to_warehouse(self._list_of_params)
+            else:
+                raise TypeOrgEquipmentError('PrinterScanner', self.model)
+        except TypeOrgEquipmentError:
+            return
 
 
 class Xerox(OrgEquipment):
@@ -103,14 +109,15 @@ class Xerox(OrgEquipment):
         Xerox.add_to_warehouse(self._list_of_params)
 
 
-p = Printer('Pop', 1000, 'P_1220c', '100x100')
-s = Scanner('Honor', 1000, '1_1220c', '100x100')
-ps = PrinterScanner('Canon', 12000, 'PS2_1000B', '120x20')
-ps1 = PrinterScanner('Apple', 22000, 'PS1_1000c', '120x30')
-x = Xerox('Wtf', 100, 'X_1000', '200x10')
-ps1.add_printer_scanner()
-p.add_printer()
-s.add_scanner()
-ps.add_printer_scanner()
-ps1.add_printer_scanner()
-print(json.dumps(Warehouse.list_equipment, indent=4))
+if __name__ == '__main__':
+    p = Printer('Pop', 1000, 'P_1220c', '100x100')
+    s = Scanner('Honor', 1000, 'S1_1220c', '100x100')
+    ps = PrinterScanner('Canon', 12000, 'PS2_1000B', '120x20')
+    ps1 = PrinterScanner('Apple', 22000, 'PS1_1000c', '120x30')
+    x = Xerox('Wtf', 100, 'X_1000', '200x10')
+    ps1.add_printer_scanner()
+    p.add_printer()
+    s.add_scanner()
+    ps.add_printer_scanner()
+    ps1.add_printer_scanner()
+    print(json.dumps(Warehouse.list_equipment, indent=4))
