@@ -83,7 +83,6 @@ class OrgEquipment:
 class Printer(OrgEquipment):
     def __init__(self, model, firm=None, cost=None, type_paint=None):
         super().__init__(model)
-        self.model = model
         self.type_paint = type_paint
         Printer._type_paint1(self)
         self._list_of_params = {'firm': firm, 'cost': cost, 'model': model, 'type_paint': self.type_paint}
@@ -106,7 +105,6 @@ class Printer(OrgEquipment):
 class Scanner(OrgEquipment):
     def __init__(self, model, firm=None, cost=None, version_scanner=None):
         super().__init__(model)
-        self.model = model
         self.version_scanner = version_scanner
         Scanner._version_scanner1(self)
         self._list_of_params = {'firm': firm, 'cost': cost, 'model': model, 'version_scanner': self.version_scanner}
