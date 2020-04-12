@@ -147,20 +147,3 @@ class Xerox(OrgEquipment):
 
     def del_xerox(self):
         Xerox.del_from_warehouse(self._list_of_params)
-
-
-if __name__ == '__main__':
-    # p = Printer('Pop', 1000, 'PR_1220C')
-    # s = Scanner('Honor', 1000, 'SC1_1220c')
-    ps = PrinterScanner('Canon', 12000, 'PS2_1000B')
-    # ps1 = PrinterScanner('Apple', 22000, 'PS1_1000c')
-    # x = Xerox('Wtf', 100, 'xe_1000')
-    # x.add_xerox()
-    # ps1.add_printer_scanner()
-    # p.add_printer()
-    # p.del_printer()
-    # s.add_scanner()
-    # s.del_scanner()
-    ps.add_printer_scanner()
-    # ps.del_printer_scanner()
-    # ps1.add_printer_scanner()

@@ -1,7 +1,6 @@
 from PythonBasics.lesson8.Warehouse.Warehouse import *
 from json import load
 
-
 """   Welcome to the office equipment accounting program.
     ------------------------------------------------------
     We have 4 type's of equipment:
