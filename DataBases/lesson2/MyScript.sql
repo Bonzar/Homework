@@ -1,6 +1,6 @@
 CREATE DATABASE IF NOT EXISTS example;
 USE example;
 CREATE TABLE IF NOT EXISTS users (
-	name CHAR(10),
+	name VARCHAR,
 	id INT
 );
