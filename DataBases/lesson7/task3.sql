@@ -1,4 +1,6 @@
 -- task 3
+-- Решил данное задание через вложенный запрос, хотя в примечании вы указали, что нужно использовать JOIN.
+-- Подскажите пожалуйста как можно решить с его помощью, если это возможно.
 
 DROP DATABASE IF EXISTS airport;
 CREATE DATABASE airport;
@@ -39,5 +41,4 @@ SELECT
 	(SELECT name FROM cities c2 WHERE label = f.`to`) as куда
 FROM
 	flights f;
-	
 

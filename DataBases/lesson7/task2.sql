@@ -6,8 +6,9 @@ FROM
 	products p
 JOIN
 	catalogs c
-ON p.catalog_id = c.id
+ON
+	p.catalog_id = c.id;
 
 
-SELECT * FROM products p
+SELECT * FROM products p;
 	
