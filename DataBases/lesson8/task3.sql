@@ -74,7 +74,7 @@ GROUP BY
 	u.id
 ORDER BY
 	activity, MIN(p.created_at), MIN(m.created_at), MIN(l.created_at)
-LIMIT 100;
+LIMIT 10;
 
 
 
