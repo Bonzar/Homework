@@ -30,7 +30,7 @@ CREATE TABLE lists (										-- ТАБЛИЦА СПИСКОВ
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,	-- id списка
 	`name` VARCHAR(100) NOT NULL,							-- название списка
 	`kanban` BOOL NOT NULL DEFAULT 0,						-- вид канбан (нет/да)
-	`colmpleted` BOOL NOT NULL DEFAULT 0,					-- закрыт ли список (нет/да)
+	`completed` BOOL NOT NULL DEFAULT 0,					-- закрыт ли список (нет/да)
 	`user_id` INT UNSIGNED NOT NULL,						-- id владельца списка
 	`created_at` DATETIME DEFAULT NOW(),					-- время создание
 	`updated_at` DATETIME DEFAULT NOW() ON UPDATE NOW()		-- время обновления
@@ -68,7 +68,7 @@ DROP TABLE IF EXISTS reminders;
 CREATE TABLE reminders (									-- ТАБЛИЦА НАПОМИНАНИЙ
 	`id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,	-- id напоминания
 	`task_id` INT UNSIGNED NOT NULL,						-- id задачи для напоминания
-	`rem_time` DATETIME NOT NULL 							-- время напоминания
+	`reminder_at` DATETIME NOT NULL 						-- время напоминания
 );
 
 -- эта таблица будет удалена далее (в связи с ненадобностью)

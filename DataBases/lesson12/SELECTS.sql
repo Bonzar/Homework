@@ -21,8 +21,8 @@ ORDER BY u2.id;
 SELECT DISTINCT u.id AS `user_id`,
 	u.nickname AS `nickname`,
 	COUNT(t2.id) OVER userr AS `total_tasks`,
-	SUM(t2.completed) OVER userr as `complited`,
-	COUNT(t2.id) OVER userr - SUM(t2.completed) OVER userr AS `uncomplited`,
+	SUM(t2.completed) OVER userr as `completed`,
+	COUNT(t2.id) OVER userr - SUM(t2.completed) OVER userr AS `uncompleted`,
 	(SELECT COUNT(1) FROM lists l3 WHERE user_id = u.id) AS `total_lists`,
 	(SELECT COUNT(1) FROM tags t3 WHERE user_id = u.id) AS `total_tags`,
 	u.created_at AS `user_created_at`,
@@ -42,12 +42,12 @@ ORDER BY `total_tasks` DESC;
 -- ВЫБОРКА СЧЁТА И УРОВНЕЙ ПОЛЬЗОВАТЕЛЕЙ (50 ОЧКОВ ЗА НЕЗАВЕРШЕННУЮ ЗАДАЧУ И 100 ОЧКОВ ЗА ЗАВЕРШЕННУЮ (МАКСИМУМ 100 ОЧКОВ ЗА ОДНУ ЗАДАЧУ))
 
 SELECT DISTINCT 
-		u.id AS 'user_id',
-		COUNT(t.id) OVER `user` AS 'total_tasks',
-		SUM(t.completed) OVER `user` as 'complited',
-		COUNT(t.id) OVER `user` - SUM(t.completed) OVER `user` AS 'uncomplited',
-		(SUM(t.completed) OVER `user` * 100) + (COUNT(t.id) OVER `user` - SUM(t.completed) OVER `user`) * 50 AS `score`,
-		get_level((SUM(t.completed) OVER `user` * 100) + (COUNT(t.id) OVER `user` - SUM(t.completed) OVER `user`) * 50) AS `level`
+	u.id AS `user_id`,
+	COUNT(t.id) OVER `user` AS `total_tasks`,
+	SUM(t.completed) OVER `user` as `completed`,
+	COUNT(t.id) OVER `user` - SUM(t.completed) OVER `user` AS `uncompleted`,
+	(SUM(t.completed) OVER `user` * 100) + (COUNT(t.id) OVER `user` - SUM(t.completed) OVER `user`) * 50 AS `score`,
+	get_level((SUM(t.completed) OVER `user` * 100) + (COUNT(t.id) OVER `user` - SUM(t.completed) OVER `user`) * 50) AS `level`
 FROM
 		users u
 	LEFT JOIN
