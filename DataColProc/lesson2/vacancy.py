@@ -54,13 +54,13 @@ def get_vacancy_from_hh(vacancy_name):
             vacancy_salary_prepared_list = vacancy_salary.replace('\xa0', '').split()
             if vacancy_salary_prepared_list:
                 if vacancy_salary_prepared_list[0] == 'от':
-                    salary_min = vacancy_salary_prepared_list[1]
+                    salary_min = int(vacancy_salary_prepared_list[1])
                 elif vacancy_salary_prepared_list[0] == 'до':
-                    salary_max = vacancy_salary_prepared_list[1]
+                    salary_max = int(vacancy_salary_prepared_list[1])
                 else:
                     vacancy_salary_prepared_MinMax = vacancy_salary_prepared_list[0].split('-')
-                    salary_min = vacancy_salary_prepared_MinMax[0]
-                    salary_max = vacancy_salary_prepared_MinMax[1]
+                    salary_min = int(vacancy_salary_prepared_MinMax[0])
+                    salary_max = int(vacancy_salary_prepared_MinMax[1])
                 currency = vacancy_salary_prepared_list[-1][:-1]
             else:
                 salary_min = None

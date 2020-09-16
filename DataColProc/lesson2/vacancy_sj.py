@@ -37,7 +37,7 @@ def get_vacancy_from_sj(vacancy_name):
         html_vacancies_list = html_vacancies_block.find_all('div', {'class': 'jNMYr GPKTZ _1tH7S'})
 
         for html_vacancy in html_vacancies_list:
-            salary_max, salary_min = None, None
+            salary_max, salary_min, currency = None, None, None
 
             vacancy_name_url = html_vacancy.find('div', {'class': '_3mfro PlM3e _2JVkc _3LJqf'})
             vacancy_name = vacancy_name_url.getText()
