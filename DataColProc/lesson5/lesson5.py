@@ -84,15 +84,17 @@ def mvideo_hits_collector():
     for gal_title in gallery_titles:
         if 'Хиты продаж' in gal_title.text:
             hits_block = gal_title.find_element_by_xpath("./ancestor::div[@class='section']")
+            next_button = hits_block.find_element_by_xpath(".//a[contains(@class, 'next-btn')]")
 
             while True:
-                next_button = hits_block.find_element_by_xpath(".//a[contains(@class, 'next-btn')]")
                 next_button.click()
-                time.sleep(1)
+                time.sleep(2)
                 if 'disable' in next_button.get_attribute('class'):
                     break
+                # Можно ли передать EC элемент в котором искать? В данном случае нужно передать hits_block, чтобы
+                # искать в нём, тк таких кнопок на сайте нет, нельзя с уверенностью найти определенную и проверять
+                # её кликабельность. Или если есть способ, то как?
 
-                # Можно ли передать EC элемент в котором искать?
                 # WebDriverWait(driver, 5).until(EC.element_to_be_clickable(
                 #     (By.XPATH, ".//a[contains(@class, 'next-btn')]")))
 
