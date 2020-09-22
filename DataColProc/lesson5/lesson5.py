@@ -1,6 +1,7 @@
 from selenium.webdriver import Safari
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 from pymongo import MongoClient
 from mailru_login import get_login, get_password
 import time
@@ -39,11 +40,7 @@ def mailru_collector():
         if len(sends) == len_of_sends_list:
             break
 
-        # Можно выполнять скролл без записи в переменную? И для чего его можно записывать?
         var = list_sends[-1].location_once_scrolled_into_view
-
-        # Без задержки не находил элемент для пролистывания, не выявил причину, и не смог реализовать через
-        # WebdriverWait и EC. Есть ли вариант с их использованием?
         time.sleep(1)
 
     while sends:
@@ -51,9 +48,9 @@ def mailru_collector():
         send_url = sends.pop()
         driver.get(send_url)
 
-        # Долго искал и не смог найти условие для задержки в EC, чтоб дала прогрузиться письму.
-        # Есть ли таковая, или другая работяющая в этом случае?
-        time.sleep(1)
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//div[@class='letter-body']"))
+        )
 
         text_send = driver.find_element_by_xpath("//div[contains(@class, 'letter-body')]").text
         title_send = driver.find_element_by_tag_name('h2').text
@@ -88,15 +85,11 @@ def mvideo_hits_collector():
 
             while True:
                 next_button.click()
-                time.sleep(2)
+                WebDriverWait(hits_block, 10).until(EC.element_to_be_clickable((By.XPATH, ".//li//h4/a")))
+                WebDriverWait(hits_block, 10).until(EC.element_to_be_clickable(
+                    (By.XPATH, ".//a[contains(@class, 'next-btn')]")))
                 if 'disable' in next_button.get_attribute('class'):
                     break
-                # Можно ли передать EC элемент в котором искать? В данном случае нужно передать hits_block, чтобы
-                # искать в нём, тк таких кнопок на сайте нет, нельзя с уверенностью найти определенную и проверять
-                # её кликабельность. Или если есть способ, то как?
-
-                # WebDriverWait(driver, 5).until(EC.element_to_be_clickable(
-                #     (By.XPATH, ".//a[contains(@class, 'next-btn')]")))
 
             goods_list_html = hits_block.find_elements_by_xpath(".//li//h4/a")
 
