@@ -35,20 +35,20 @@ class LeruamerlenparserPipeline:
 
 class LeruamerlenPhotoParserPipeline(ImagesPipeline):
     def get_media_requests(self, item, info):
-        # self.new_item = item
         if item['images']:
             for img_link in item['images']:
                 try:
-                    yield scrapy.Request(img_link)
+                    # yield scrapy.Request(img_link)
+                    yield scrapy.Request(img_link, meta=item)
                 except Exception as e:
                     print(e)
         return item
 
-    # def file_path(self, request, response=None, info=None):
-    #     folder_name = self.new_item['url'].split('/')[-2]
-    #     domen_name = self.new_item['url'].split('/')[2]
-    #     image_guid = hashlib.sha1(to_bytes(request.url)).hexdigest()
-    #     return 'full/%s/%s/%s.jpg' % (domen_name, folder_name, image_guid)
+    def file_path(self, request, response=None, info=None):
+        folder_name = request.meta['url'].split('/')[-2]
+        domen_name = request.meta['url'].split('/')[2]
+        image_guid = hashlib.sha1(to_bytes(request.url)).hexdigest()
+        return 'full/%s/%s/%s.jpg' % (domen_name, folder_name, image_guid)
 
     def item_completed(self, results, item, info):
         if results:
